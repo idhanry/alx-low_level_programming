@@ -1,23 +1,31 @@
 #include "main.h"
 
 /**
- * flip_bits - counts the number of bits to change
- * to get from one number to another
- * @n: first number
- * @m: second number
+ * flip_bits - counts the number of bits that need to be flipped to
+ * change one unsigned long integer to another.
  *
- * Return: number of bits to change
+ * This function calculates the Hamming distance between two unsigned long
+ * integers, which represents the number of bits that differ between them.
+ *
+ * @n: The first unsigned long integer.
+ * @m: The second unsigned long integer.
+ *
+ * Return: The number of bits that need to be flipp to transform 'n' into 'm'.
  */
 unsigned int flip_bits(unsigned long int n, unsigned long int m)
 {
-	int a, countbit = 0;
+	int i, c = 0;
 	unsigned long int current;
-	unsigned long int exclusive = n ^ m;
+	unsigned long int xor = n ^ m;
 
-	for (a = 63; a >= 0; a--)
+	/* Iterate through each bit of the XOR result */
+	for (i = 63; i >= 0; i--)
 	{
-		current = exclusive >> a;
+		current = xor >> i;
 		if (current & 1)
-			countbit++;
+			c++;
 	}
+
+	return (c);
+}
 
